@@ -185,7 +185,7 @@ def write_in_csv(sequence_url,msg_number,entry_in):
     csv1_rows.append({"Phone_number": str(msg_number),
                       "Msg_status": str(sequence_url["response"][0]["status"]),
                       "Date": str(today.date()),
-                      "Time": str(datetime.now().strftime("%H:%M:%S"))
+                      "Time": str((datetime.now() + timedelta(hours=5, minutes=30)).strftime('%H:%M:%S'))
                       })
     with open(r'/home/credicxo/credicxo-project/new_recovery_msg_csv1.csv', 'a') as csvfile1:
         writer = csv.DictWriter(csvfile1, fieldnames=csv1_fields)

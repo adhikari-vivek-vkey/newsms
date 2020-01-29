@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="331da272-cc03-449c-847a-4820bd817938" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/sms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/Newmessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/Newmessage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
