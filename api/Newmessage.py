@@ -8,18 +8,18 @@ emi_amount_2 = lambda loan_amt: int(loan_amt) * .20
 base_penalty = 50
 charge_per_day = .01
 interest = 12
+path_message = '/home/credicxo/credicxo-project/'
+
 
 def penalty_1(total_day, loan):
     loan = int(loan)
     return int((total_day - 15) * (charge_per_day * emi_amount_1(loan)) + base_penalty)
 
+
 def penalty_2(total_day, loan):
     loan = int(loan)
 
     return int((total_day - 61) * (charge_per_day * emi_amount_1(loan)) + base_penalty)
-
-
-
 
 
 def generate_text(v,users_name,ref_dict,bank_dict):
@@ -32,12 +32,8 @@ def generate_text(v,users_name,ref_dict,bank_dict):
     entry_in = []
 
     loan_amt = v["loan_amount"]
-    print(str(v["disbursal_date"]), str(v["disbursal_date"]))
-    print(today, today)
     loan_date = datetime.strptime(str(v["disbursal_date"]), date_format)
-    print(loan_date)
     delta = today - loan_date
-    print(delta)
     # temp = today - timedelta(days = 14)
     # delta = today - temp
     # print(delta.days)
@@ -85,7 +81,6 @@ def generate_text(v,users_name,ref_dict,bank_dict):
         elif delta.days in range(65, 71, 2):
             entry_in.append("EMI1_65-70")
             #bank_acc(k)
-            # print(str(bank_dict['account_number'])[-4:])bank_dict[k]
             text = f'Dear {name_dict}, The Honourable Court has issued a summons for your appearance in a criminal case filed by Credicxo Tech Pvt. Ltd. for the dishonour of Personal Loan a/c ending with {str(bank_dict["account_number"])[-4:]}. Non-appearance may lead to the issuance of a warrant. Kindly pay through https://play.google.com/store/apps/details?id=com.credicxo.loan.personal'
 
         else:
@@ -125,6 +120,7 @@ def generate_text(v,users_name,ref_dict,bank_dict):
             print(delta.days, "th day is not handeled for emi 2")
     return [text, msg_number, entry_in]
 
+
 #generate_text(v, users_name, ref_dict, bank_dict)
 def api_call(text,msg_number):
     API = "https://api.equence.in/pushsms"
@@ -141,10 +137,10 @@ def api_call(text,msg_number):
         "from": "CREDXO",
         "text": text,
     }
-    # print("data = " + str(data))
     response = requests.get(url=API, params=data)
     sequence_url = json.loads(response.text)
     return sequence_url
+
 
 def write_in_csv(sequence_url,msg_number,entry_in):
     date_format = "%Y-%m-%d"
@@ -187,7 +183,7 @@ def write_in_csv(sequence_url,msg_number,entry_in):
                       "Date": str(today.date()),
                       "Time": str((datetime.now() + timedelta(hours=5, minutes=30)).strftime('%H:%M:%S'))
                       })
-    with open(r'/home/credicxo/credicxo-project/new_recovery_msg_csv1.csv', 'a') as csvfile1:
+    with open(path_message + 'day_' + str(today.date()) + '.csv', 'a') as csvfile1:
         writer = csv.DictWriter(csvfile1, fieldnames=csv1_fields)
         if csvfile1.tell() == 0:
             writer.writeheader()
@@ -195,9 +191,8 @@ def write_in_csv(sequence_url,msg_number,entry_in):
         writer.writerows(csv1_rows)
 
     csv2_rows.append(csv2_dict)
-    # print(csv2_rows)
     if csv2_rows[0]["total_msg"] != 0:
-        with open(r'/home/credicxo/credicxo-project/new_recovery_msg_csv2.csv', 'a') as csvfile2:
+        with open(path_message + 'new_recovery_msg_csv2.csv', 'a') as csvfile2:
             writer = csv.DictWriter(csvfile2, fieldnames=csv2_fields)
             if csvfile2.tell() == 0:
                 writer.writeheader()
@@ -213,34 +208,14 @@ def send_message(d):
     v['loan_amount'] = d['loan_amount']
     v['paid_status'] = x #d['paid_status'][0],
     v['disbursal_date'] = d['disbursal_date']
-    print(v)
     users_name = d['users_name']
     ref_dict['ref_number'] = d['ref_number'],
     ref_dict['ref_name']=d["ref_name"]
-    print(ref_dict['ref_number'],ref_dict['ref_name'])
     bank_dict['account_number'] = d["account_number"]
-    print(v, users_name, ref_dict, bank_dict)
     text, msg_number, entry_in = generate_text(v, users_name, ref_dict, bank_dict)
-    print(text, msg_number, entry_in)
     if text != None:
         sequence_url = api_call(text, msg_number)
         print(sequence_url)
         write_in_csv(sequence_url, msg_number, entry_in)
     else:
         print('null')
-
-
-# d = {
-#     'contact_no' : 9968038609,
-#     'loan_amount':1000,
-#     'paid_status':"0",
-#     'disbursal_date':'2020-01-13',
-#     'users_name':"hello",
-#     'ref_number':7065119155,
-#     'ref_name':"references",
-#     'account_number':123444454,
-# }
-#
-# send_message(d)
-
-

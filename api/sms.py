@@ -7,6 +7,8 @@ import csv
 import sys
 import os
 
+django_path = r'/home/credicxo/credicxo-project/'
+
 
 def DailySms():
     FilterDate = str(timezone.now() - timedelta(days=10))
@@ -15,7 +17,6 @@ def DailySms():
 
     for i in user_data:
         try:
-            print(i['loan_type__amount'], i['repayment_status'], i['loan_date'])
             profile = Profile.objects.filter(user=i['user__id']).values('user__username', 'phone_number',
                                                                         'preference__relation', 'preference_number')[0]
             bank_data = BankAccountDetails.objects.filter(user=i['user__id']).values('account_number')[0]
@@ -35,7 +36,7 @@ def DailySms():
 
         except Exception as e:
             print(e)
-            f = open("/home/credicxo/credicxo-project/not_work.txt", "a+")
+            f = open(django_path + "not_work.txt", "a+")
             f.write("{} \n".format(i))
     date_format = "%Y-%m-%d"
     today = datetime.strptime(str(date.today()), date_format)
@@ -57,7 +58,7 @@ def DailySms():
     total16 = 0
     total17 = 0
     total = 0
-    with open(r"/home/credicxo/credicxo-project/new_recovery_msg_csv2.csv") as fin:
+    with open(django_path + "new_recovery_msg_csv2.csv") as fin:
         csv_file = csv.reader(fin)
         csv.field_size_limit(sys.maxsize)
         next(csv_file, None)
@@ -109,9 +110,9 @@ def DailySms():
     csv2_rows = []
     csv2_rows.append(csv2_dict)
     if total != 0:
-        with open(r'/home/credicxo/credicxo-project/final.csv', 'a') as csvfile2:
+        with open(django_path + 'final.csv', 'a') as csvfile2:
             writer = csv.DictWriter(csvfile2, fieldnames=csv2_fields)
             if csvfile2.tell() == 0:
                 writer.writeheader()
             writer.writerows(csv2_rows)
-    os.remove(r'/home/credicxo/credicxo-project/new_recovery_msg_csv2.csv')
+    os.remove(django_path + 'new_recovery_msg_csv2.csv')

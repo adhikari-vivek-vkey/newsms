@@ -24,6 +24,9 @@ class Profile(models.Model):
     phone_number = models.BigIntegerField(unique=True, null=True)
     preference = models.ForeignKey('Preferences', on_delete=models.CASCADE, null=True)
     preference_number = models.BigIntegerField(null=True)
+    # friend_contact_name = models.TextField(null=True)
+    # friend_number = models.BigIntegerField(null=True)
+
 
 
 class Preferences(models.Model):
