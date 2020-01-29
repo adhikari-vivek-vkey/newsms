@@ -123,22 +123,24 @@ def generate_text(v,users_name,ref_dict,bank_dict):
 
 #generate_text(v, users_name, ref_dict, bank_dict)
 def api_call(text,msg_number):
-    API = "https://api.equence.in/pushsms"
-
-    headers = {
-        "content-type": "application/json",
-        "accept": "application/json",
-    }
-
-    data = {
-        "username": "credicxo_tr",
-        "password": "zzCD-43-",
-        "to": "91" + msg_number,
-        "from": "CREDXO",
-        "text": text,
-    }
-    response = requests.get(url=API, params=data)
-    sequence_url = json.loads(response.text)
+    # API = "https://api.equence.in/pushsms"
+    #
+    # headers = {
+    #     "content-type": "application/json",
+    #     "accept": "application/json",
+    # }
+    #
+    # data = {
+    #     "username": "credicxo_tr",
+    #     "password": "zzCD-43-",
+    #     "to": "91" + msg_number,
+    #     "from": "CREDXO",
+    #     "text": text,
+    # }
+    # response = requests.get(url=API, params=data)
+    # sequence_url = json.loads(response.text)
+    sequence_url = {'response': [{'destination': '919968038609', 'id': 0, 'mrid': '8001291303196552321', 'segment': 0,
+                                  'status': 'success'}]}
     return sequence_url
 
 

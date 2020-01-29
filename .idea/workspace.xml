@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/api/Newmessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/Newmessage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/sms.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/sms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,38 +102,38 @@
       <screen x="0" y="27" width="1600" height="873" />
     </state>
     <state x="533" y="211" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1600.873@0.27.1600.873" timestamp="1580209380550" />
-    <state width="1577" height="210" key="GridCell.Tab.0.bottom" timestamp="1580279797900">
+    <state width="1577" height="204" key="GridCell.Tab.0.bottom" timestamp="1580283413536">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.0.bottom/0.27.1600.873@0.27.1600.873" timestamp="1580279797900" />
-    <state width="1577" height="210" key="GridCell.Tab.0.center" timestamp="1580279797900">
+    <state width="1577" height="204" key="GridCell.Tab.0.bottom/0.27.1600.873@0.27.1600.873" timestamp="1580283413536" />
+    <state width="1577" height="204" key="GridCell.Tab.0.center" timestamp="1580283413536">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.0.center/0.27.1600.873@0.27.1600.873" timestamp="1580279797900" />
-    <state width="1577" height="210" key="GridCell.Tab.0.left" timestamp="1580279797899">
+    <state width="1577" height="204" key="GridCell.Tab.0.center/0.27.1600.873@0.27.1600.873" timestamp="1580283413536" />
+    <state width="1577" height="204" key="GridCell.Tab.0.left" timestamp="1580283413536">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.0.left/0.27.1600.873@0.27.1600.873" timestamp="1580279797899" />
-    <state width="1577" height="210" key="GridCell.Tab.0.right" timestamp="1580279797900">
+    <state width="1577" height="204" key="GridCell.Tab.0.left/0.27.1600.873@0.27.1600.873" timestamp="1580283413536" />
+    <state width="1577" height="204" key="GridCell.Tab.0.right" timestamp="1580283413536">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.0.right/0.27.1600.873@0.27.1600.873" timestamp="1580279797900" />
-    <state width="1577" height="210" key="GridCell.Tab.1.bottom" timestamp="1580279797902">
+    <state width="1577" height="204" key="GridCell.Tab.0.right/0.27.1600.873@0.27.1600.873" timestamp="1580283413536" />
+    <state width="1577" height="204" key="GridCell.Tab.1.bottom" timestamp="1580283413537">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.1.bottom/0.27.1600.873@0.27.1600.873" timestamp="1580279797902" />
-    <state width="1577" height="210" key="GridCell.Tab.1.center" timestamp="1580279797901">
+    <state width="1577" height="204" key="GridCell.Tab.1.bottom/0.27.1600.873@0.27.1600.873" timestamp="1580283413537" />
+    <state width="1577" height="204" key="GridCell.Tab.1.center" timestamp="1580283413537">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.1.center/0.27.1600.873@0.27.1600.873" timestamp="1580279797901" />
-    <state width="1577" height="210" key="GridCell.Tab.1.left" timestamp="1580279797900">
+    <state width="1577" height="204" key="GridCell.Tab.1.center/0.27.1600.873@0.27.1600.873" timestamp="1580283413537" />
+    <state width="1577" height="204" key="GridCell.Tab.1.left" timestamp="1580283413537">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.1.left/0.27.1600.873@0.27.1600.873" timestamp="1580279797900" />
-    <state width="1577" height="210" key="GridCell.Tab.1.right" timestamp="1580279797901">
+    <state width="1577" height="204" key="GridCell.Tab.1.left/0.27.1600.873@0.27.1600.873" timestamp="1580283413537" />
+    <state width="1577" height="204" key="GridCell.Tab.1.right" timestamp="1580283413537">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
-    <state width="1577" height="210" key="GridCell.Tab.1.right/0.27.1600.873@0.27.1600.873" timestamp="1580279797901" />
+    <state width="1577" height="204" key="GridCell.Tab.1.right/0.27.1600.873@0.27.1600.873" timestamp="1580283413537" />
     <state x="289" y="97" key="SettingsEditor" timestamp="1580190417500">
       <screen x="0" y="27" width="1600" height="873" />
     </state>
@@ -141,16 +142,5 @@
       <screen x="0" y="27" width="1600" height="873" />
     </state>
     <state x="643" y="380" width="303" height="164" key="VCS.ChangelistChooser/0.27.1600.873@0.27.1600.873" timestamp="1580280682772" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/api/Newmessage.py</url>
-          <line>26</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

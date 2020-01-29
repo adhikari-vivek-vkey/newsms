@@ -17,12 +17,12 @@ def DailySms():
 
     for i in user_data:
         try:
-            profile = Profile.objects.filter(user=i['user__id']).values('user__username', 'phone_number',
+            profile = Profile.objects.filter(user=i['user__id']).values('name', 'phone_number',
                                                                         'preference__relation', 'preference_number')[0]
             bank_data = BankAccountDetails.objects.filter(user=i['user__id']).values('account_number')[0]
             fin_date = datetime.strptime(str(i['loan_date']), '%Y-%m-%d %H:%M:%S+00:00').date()
             data = {
-                "users_name": profile['user__username'],
+                "users_name": profile['name'],
                 "contact_no": profile['phone_number'],
                 "account_number": bank_data['account_number'],
                 "ref_name": profile['preference__relation'],
