@@ -8,7 +8,7 @@ emi_amount_2 = lambda loan_amt: int(loan_amt) * .20
 base_penalty = 50
 charge_per_day = .01
 interest = 12
-path_message = '/home/credicxo/credicxo-project/'
+path_message = r'/home/credicxo/credicxo-project/'
 
 
 def penalty_1(total_day, loan):
