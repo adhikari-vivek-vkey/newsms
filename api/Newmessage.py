@@ -3,6 +3,7 @@ from datetime import datetime, date, timedelta
 import requests
 import json
 import csv
+# from . import sms
 emi_amount_1 = lambda loan_amt: int(loan_amt) * .80
 emi_amount_2 = lambda loan_amt: int(loan_amt) * .20
 base_penalty = 50
@@ -67,7 +68,8 @@ def generate_text(v,users_name,ref_dict,bank_dict):
             entry_in.append("EMI1_36-45")
             penalty_now = penalty_1(delta.days, v["loan_amount"])
             #cust_ref(k)
-            msg_number = ref_dict['ref_number']
+            msg_number = str(ref_dict['ref_number'][0])
+            print(msg_number)
             text = f'Dear Sir/Mam, This is to inform you that {name_dict} (Phone number - {v["contact_no"]}) has  taken a loan from Credicxo and has not repaid since {str(str((loan_date + timedelta(days=15)).date()))}.As you are listed as a reference in the Loan application,kindly urge them to repay the loan to avoid legal proceedings.'
 
         elif delta.days in range(56, 61, 2):
@@ -123,82 +125,52 @@ def generate_text(v,users_name,ref_dict,bank_dict):
 
 #generate_text(v, users_name, ref_dict, bank_dict)
 def api_call(text,msg_number):
-    # API = "https://api.equence.in/pushsms"
-    #
-    # headers = {
-    #     "content-type": "application/json",
-    #     "accept": "application/json",
-    # }
-    #
-    # data = {
-    #     "username": "credicxo_tr",
-    #     "password": "zzCD-43-",
-    #     "to": "91" + msg_number,
-    #     "from": "CREDXO",
-    #     "text": text,
-    # }
-    # response = requests.get(url=API, params=data)
-    # sequence_url = json.loads(response.text)
-    sequence_url = {'response': [{'destination': '919968038609', 'id': 0, 'mrid': '8001291303196552321', 'segment': 0,
-                                  'status': 'success'}]}
+    API = "https://api.equence.in/pushsms"
+
+    headers = {
+        "content-type": "application/json",
+        "accept": "application/json",
+    }
+
+    data = {
+        "username": "credicxo_tr",
+        "password": "zzCD-43-",
+        "to": "91" + msg_number,
+        "from": "CREDXO",
+        "text": text,
+    }
+    response = requests.get(url=API, params=data)
+    sequence_url = json.loads(response.text)
+    # sequence_url = {'response': [{'destination': '919968038609', 'id': 0, 'mrid': '8001291303196552321', 'segment': 0,
+    #                               'status': 'success'}]}
     return sequence_url
 
 
-def write_in_csv(sequence_url,msg_number,entry_in):
+def write_in_csv(sequence_url, msg_number, entry_in, user_id_det, con_name):
     date_format = "%Y-%m-%d"
     today = datetime.strptime(str(date.today()), date_format)
-    csv1_fields = ["Phone_number", "Msg_status", "Date", "Time"]
+    csv1_fields = ["id", "Detail", "Phone_number", "Msg_status", "Date", "Time"]
     csv1_rows = []
 
-    csv2_fields = ["Date", "EMI1_10-13", "EMI1_14", "EMI1_15", "EMI1_16-25", "EMI1_26-30", "EMI1_31-35", "EMI1_36-45",
-                   "EMI1_56-60", "EMI1_61-64", "EMI1_65-70", "EMI2_56-59", "EMI2_60", "EMI2_61", "EMI2_62-70",
-                   "EMI2_71-75", "EMI2_76-81", "EMI2_82-91", "total_msg"]
-    csv2_rows = []
-    csv2_dict = {
+    # if str(sequence_url["response"][0]["status"]) == "success":
+    #     sms.csv2_dict[entry_in[0]] += 1
+    #     sms.csv2_dict["total_msg"] += 1
+
+
+    csv1_rows.append({
+        "id": user_id_det,
+        "Detail": con_name,
+        "Phone_number": str(msg_number),
+        "Msg_status": str(sequence_url["response"][0]["status"]),
         "Date": str(today.date()),
-        "EMI1_10-13": 0,
-        "EMI1_14": 0,
-        "EMI1_15": 0,
-        "EMI1_16-25": 0,
-        "EMI1_26-30": 0,
-        "EMI1_31-35": 0,
-        "EMI1_36-45": 0,
-        "EMI1_56-60": 0,
-        "EMI1_61-64": 0,
-        "EMI1_65-70": 0,
-        "EMI2_56-59": 0,
-        "EMI2_60": 0,
-        "EMI2_61": 0,
-        "EMI2_62-70": 0,
-        "EMI2_71-75": 0,
-        "EMI2_76-81": 0,
-        "EMI2_82-91": 0,
-        "total_msg": 0
-    }
-    if str(sequence_url["response"][0]["status"]) == "success":
-        csv2_dict[entry_in[0]] += 1
-        csv2_dict["total_msg"] += 1
-
-
-    csv1_rows.append({"Phone_number": str(msg_number),
-                      "Msg_status": str(sequence_url["response"][0]["status"]),
-                      "Date": str(today.date()),
-                      "Time": str((datetime.now() + timedelta(hours=5, minutes=30)).strftime('%H:%M:%S'))
-                      })
+        "Time": str((datetime.now() + timedelta(hours=5, minutes=30)).strftime('%H:%M:%S'))
+    })
     with open(path_message + 'day_' + str(today.date()) + '.csv', 'a') as csvfile1:
         writer = csv.DictWriter(csvfile1, fieldnames=csv1_fields)
         if csvfile1.tell() == 0:
             writer.writeheader()
 
         writer.writerows(csv1_rows)
-
-    csv2_rows.append(csv2_dict)
-    if csv2_rows[0]["total_msg"] != 0:
-        with open(path_message + 'new_recovery_msg_csv2.csv', 'a') as csvfile2:
-            writer = csv.DictWriter(csvfile2, fieldnames=csv2_fields)
-            if csvfile2.tell() == 0:
-                writer.writeheader()
-            writer.writerows(csv2_rows)
 
 
 def send_message(d):
@@ -210,14 +182,34 @@ def send_message(d):
     v['loan_amount'] = d['loan_amount']
     v['paid_status'] = x #d['paid_status'][0],
     v['disbursal_date'] = d['disbursal_date']
+    user_id_detail = d['user_id']
     users_name = d['users_name']
     ref_dict['ref_number'] = d['ref_number'],
-    ref_dict['ref_name']=d["ref_name"]
+    ref_dict['ref_name']= d["ref_name"]
     bank_dict['account_number'] = d["account_number"]
     text, msg_number, entry_in = generate_text(v, users_name, ref_dict, bank_dict)
+    con_numb = v['contact_no']
+    if msg_number == str(con_numb):
+        con_name = 'contact_no'
+    else:
+        con_name = 'preference_number'
     if text != None:
         sequence_url = api_call(text, msg_number)
         print(sequence_url)
-        write_in_csv(sequence_url, msg_number, entry_in)
+        write_in_csv(sequence_url, msg_number, entry_in, user_id_detail, con_name)
     else:
         print('null')
+
+
+data = {
+    "users_name": 'aman',
+    "contact_no": 9267988656,
+    "account_number": 123456789,
+    "ref_name": 'vivek',
+    "ref_number": 9968038609,
+    'loan_amount': 1000,
+    'paid_status': '0',
+    'disbursal_date': '2020-01-19',
+    'user_id': '123',
+}
+send_message(data)
