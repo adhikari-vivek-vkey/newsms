@@ -5,6 +5,7 @@ from datetime import datetime, date
 from .Newmessage import send_message
 import csv
 import sys
+import os
 
 
 def DailySms():
@@ -113,3 +114,4 @@ def DailySms():
             if csvfile2.tell() == 0:
                 writer.writeheader()
             writer.writerows(csv2_rows)
+    os.remove(r'/home/credicxo/credicxo-project/new_recovery_msg_csv2.csv')
